@@ -1,0 +1,47 @@
+<!--
+ ! Excerpted from "Pragmatic Ajax"
+ ! We make no guarantees that this code is fit for any purpose. 
+ ! Visit http://www.pragmaticprogrammer.com/titles/ajax for more book information.
+-->
+<html>
+    <head>
+        <title>Ajaxian Maps</title>
+        <style type="text/css">
+            h1 {
+                font: 20pt sans-serif;
+            }
+            #outerDiv {
+                height: 600px;
+                width: 800px;
+                border: 1px solid black;
+                position: relative;
+                overflow: hidden;
+            }
+
+            #innerDiv {
+                position: relative;
+                left: 0px;
+                top: 0px;
+            }
+        </style>
+	<script src="shelf.js" type="text/javascript"></script>
+    </head>
+    
+    <body onload="init()">
+        <p>
+            <h1>Ajaxian Maps</h1>
+        </p>
+        <div id="outerDiv">
+            <div style="position: absolute; top: 10px; left: 10px; z-index: 1">
+                <img src="resources/images/zoom.png" onclick="toggleZoom()"/>
+            </div>
+            <div style="position: absolute; top: 10px; left: 87px; z-index: 1">
+                <img src="resources/images/pushpin.png" onclick="togglePushPin()"/>
+            </div>
+            <div id="innerDiv" style="z-index: 0">
+                The rain in Spain falls mainly in the plains.
+            </div>
+        </div>
+    </body>
+    
+</html>

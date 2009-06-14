@@ -5,7 +5,7 @@
             var tileSize = 100;
             // START:globalstate
             var zoom = 0;
-            var zoomSizes = [ [ "2000px", "1400px" ], [ "1500px", "1050px" ] ];
+            var zoomSizes = [ [ "5700px", "5800px" ], [ "1500px", "1050px" ] ];
             // END:globalstate
 
             // used to control moving the map div
@@ -100,7 +100,7 @@
                     var img = document.getElementById(tileName);
                     if (!img) {
                         img = document.createElement("img");
-                        img.src = "resources/tiles/" + tileName + ".jpg";
+                        img.src = "res/map-tiles/" + tileName + ".jpg";
                         img.style.position = "absolute";
                         img.style.left = (tileArray[0] * tileSize) + "px";
                         img.style.top = (tileArray[1] * tileSize) + "px";

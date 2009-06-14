@@ -1,7 +1,7 @@
 
             // constants
-            var viewportWidth = 800;
-            var viewportHeight = 600;
+            var viewportWidth = 800; // dummy values
+            var viewportHeight = 600; // dummy values
             var tileSize = 100;
             // START:globalstate
             var zoom = 0;
@@ -61,18 +61,20 @@
                     if(dragy)
 		      {
 		        innerDiv.style.top = top + (event.clientY - dragStartTop);
-			if(stripPx(innerDiv.style.top) < -800)
-			  innerDiv.style.top = -800;
+			top_limit = viewportWidth - innerDiv.style.height;
+			if(stripPx(innerDiv.style.top) < top_limit)
+			  innerDiv.style.top = top_limit;
 			if(stripPx(innerDiv.style.top) > 0)
-			  innerDiv.style.top = 0;
+			  innerDiv.style.top = 10;
 		      }
                     if(dragx)
 		      {
 			innerDiv.style.left = left + (event.clientX - dragStartLeft);
-			if(stripPx(innerDiv.style.left) < -1200)
-			  innerDiv.style.left = -1200;
+			left_limit = viewportWidth - innerDiv.style.width;
+			if(stripPx(innerDiv.style.left) < left_limit)
+			  innerDiv.style.left = left_limit;
 			if(stripPx(innerDiv.style.left) > 0)
-			  innerDiv.style.left = 0;
+			  innerDiv.style.left = 10;
 		      }
                 }
 
@@ -91,7 +93,7 @@
                     var tileArray = visibleTiles[i];
                     // START:imgZoomLevel
 		  if(tileArray[0]>19 || tileArray[0]<0) dragx = false;
-		  if(tileArray[1]>13 || tileArray[0]<0) dragy = false;
+		  if(tileArray[1]>13  || tileArray[0]<0) dragy = false;
 
                     var tileName = "x" + tileArray[0] + "y" + tileArray[1] + "z" + zoom;
                     // END:imgZoomLevel
@@ -165,6 +167,11 @@
                 var innerDiv = document.getElementById("innerDiv");
                 innerDiv.style.width = width;
                 innerDiv.style.height = height;
+	        var oDiv = document.getElementById("outerDiv");
+	      oDiv.style.width = "100%";
+	      oDiv.style.height = "100%";
+	      viewportWidth = oDiv.offsetWidth;
+	      viewportHeight = oDiv.offsetHeight;
             }
 
             // START:toggleZoom

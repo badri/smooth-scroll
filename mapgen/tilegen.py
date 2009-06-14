@@ -80,8 +80,10 @@ def generate_library(shelves):
 
 
 # map_tiles
-def split_tiles(meta_shelf, tilex=100, tiley=100, zoom=0):
+def split_tiles(meta_shelf, tilex=100, tiley=100, zoom=0, scale=1.0):
     'split the library into 100x100 tiles'
+    meta_shelf=meta_shelf.resize((int(meta_shelf.size[0]*scale), int(meta_shelf.size[1]*scale)))
+    meta_shelf.save('final.jpg', "JPEG")
     map_tile_x = range(0, meta_shelf.size[0], tilex)
     map_tile_y = range(0, meta_shelf.size[1], tiley)
     [meta_shelf.crop((x,y,x+100,y+100)).save(res_dir + os.path.sep + 'map-tiles/x'+str(x/tilex)+'y'+str(y/tiley)+'z'+ str(zoom) +'.jpg', "JPEG") for x in map_tile_x for y in map_tile_y]
@@ -95,9 +97,12 @@ for query in queries:
     #get_books(query)
     shelves.append(generate_meta_shelf(shelf_title=query))
     pass
+temporary_library = generate_library(shelves)
+split_tiles(temporary_library)
 
-split_tiles(generate_library(shelves))
+split_tiles(temporary_library, scale=0.5, zoom=1)
+
 os.chdir(r'/home/badri/git/smooth-scroll/res')
 
-# meta_shelf.save('final.jpg', "JPEG")
+
 

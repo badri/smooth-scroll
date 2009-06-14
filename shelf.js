@@ -5,7 +5,7 @@
             var tileSize = 100;
             // START:globalstate
             var zoom = 0;
-            var zoomSizes = [ [ "5700px", "5800px" ], [ "1500px", "1050px" ] ];
+            var zoomSizes = [ [ "5700px", "5800px" ], [ "2800px", "2900px" ] ];
             // END:globalstate
 
             // used to control moving the map div
@@ -64,7 +64,7 @@
 			if(stripPx(innerDiv.style.top) < top_limit)
 			  innerDiv.style.top = top_limit;
 			if(stripPx(innerDiv.style.top) > 0)
-			  innerDiv.style.top = 10;
+			  innerDiv.style.top = 0;
 		      }
                     if(dragx)
 		      {
@@ -73,7 +73,7 @@
 			if(stripPx(innerDiv.style.left) < left_limit)
 			  innerDiv.style.left = left_limit;
 			if(stripPx(innerDiv.style.left) > 0)
-			  innerDiv.style.left = 10;
+			  innerDiv.style.left = 0;
 		      }
                 }
 
@@ -107,7 +107,6 @@
                         img.style.zIndex = 0;
                         img.setAttribute("id", tileName);
 		      if(stripPx(img.style.top)<=(stripPx(zoomSizes[zoom][1])-100) && stripPx(img.style.left)<=(stripPx(zoomSizes[zoom][0])-100))
-		      // if(stripPx(img.style.top)<=1300 && stripPx(img.style.left)<=1900)
                         innerDiv.appendChild(img);
                     }
                 }
@@ -141,8 +140,8 @@
 
                 var visibleTileArray = [];
                 var counter = 0;
-                for (x = startX; x < (tilesX + startX); x++) {
-                    for (y = startY; y < (tilesY + startY); y++) {
+                for (x = startX; x <= (tilesX + startX); x++) {
+                    for (y = startY; y <= (tilesY + startY); y++) {
                         visibleTileArray[counter++] = [x, y];
                     }
                 }

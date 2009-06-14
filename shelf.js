@@ -39,7 +39,6 @@
             function startMove(event) {
                 // necessary for IE
                 if (!event) event = window.event;
-
                 dragStartLeft = event.clientX;
                 dragStartTop = event.clientY;
                 var innerDiv = document.getElementById("innerDiv");

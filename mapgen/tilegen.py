@@ -1,4 +1,6 @@
 import Image
+import random
+import os
 
 res_dir = '/opt/git-repos/smooth-scroll/res/'
 
@@ -6,7 +8,7 @@ big_tile = Image.open(res_dir + 'tile.jpg')
 tile = big_tile.resize((529, 529))
 
 nr_of_books_per_shelf = 5
-nr_of_shelves = 2
+nr_of_shelves = 8
 gap_between_shelves = 100
 x_offset = 300
 shelf_width = 40 + nr_of_books_per_shelf*300 + 40 + x_offset
@@ -32,17 +34,19 @@ for j in range(len(y)-1):
     x = range(40 + x_offset/2, shelf_width + 1, 300)
     for i in range(len(x) - 1):
         shelf.paste(bkgnd, (x[i],y[j]))
-        book = Image.open(res_dir + 'books/' + str(random.randint(1,4))+ '.jpg')
-        if book.size[1] > 400:
-            book = book.resize((book.size[0]/2, book.size[1]/2), Image.ANTIALIAS)
-            if book.size[1] > 200:
+        book_file = res_dir + 'books/' + str(nr_of_books_per_shelf*(i+1) + j + 1 + 79)+ '.jpg'
+        if os.path.exists(book_file):
+            book = Image.open(book_file)
+            if book.size[1] > 400:
                 book = book.resize((book.size[0]/2, book.size[1]/2), Image.ANTIALIAS)
-        if book.size[1] > 300:
-            diff = book.size[1] - 300
-            shelf.paste(book, (x[i] + 10,y[j]-diff-80))
-        else:
-            diff = 300 - book.size[1]
-            shelf.paste(book, (x[i] + 10, y[j]+diff-80))
+                if book.size[1] > 200:
+                    book = book.resize((book.size[0]/2, book.size[1]/2), Image.ANTIALIAS)
+            if book.size[1] > 300:
+                diff = book.size[1] - 300
+                shelf.paste(book, (x[i] + 10,y[j]-diff-80))
+            else:
+                diff = 300 - book.size[1]
+                shelf.paste(book, (x[i] + 10, y[j]+diff-80))
     shelf.paste(mask_right, (x[i+1],y[j]))
 shelf.save(res_dir + 'final.jpg', "JPEG")
 # map_tiles

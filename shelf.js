@@ -91,8 +91,8 @@
                 for (i = 0; i < visibleTiles.length; i++) {
                     var tileArray = visibleTiles[i];
                     // START:imgZoomLevel
-		  if(tileArray[0]>19 || tileArray[0]<0) dragx = false;
-		  if(tileArray[1]>13  || tileArray[0]<0) dragy = false;
+		  if(tileArray[0]>(stripPx(zoomSizes[zoom][0])/100 - 1) || tileArray[0]<0) dragx = false;
+		  if(tileArray[1]>(stripPx(zoomSizes[zoom][0])/100 - 1)  || tileArray[0]<0) dragy = false;
 
                     var tileName = "x" + tileArray[0] + "y" + tileArray[1] + "z" + zoom;
                     // END:imgZoomLevel
@@ -106,7 +106,8 @@
                         img.style.top = (tileArray[1] * tileSize) + "px";
                         img.style.zIndex = 0;
                         img.setAttribute("id", tileName);
-		      if(stripPx(img.style.top)<=1300 && stripPx(img.style.left)<=1900)
+		      if(stripPx(img.style.top)<=(stripPx(zoomSizes[zoom][1])-100) && stripPx(img.style.left)<=(stripPx(zoomSizes[zoom][0])-100))
+		      // if(stripPx(img.style.top)<=1300 && stripPx(img.style.left)<=1900)
                         innerDiv.appendChild(img);
                     }
                 }
